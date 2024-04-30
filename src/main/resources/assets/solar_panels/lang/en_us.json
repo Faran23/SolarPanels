@@ -1,0 +1,28 @@
+{
+  "block.solar_panels.solar_panel": "Solar Panel",
+
+  "creativetab.solar_panels": "Solar Panels",
+
+  "tooltip.solar_panels.energy": "Energy Stored",
+  "tooltip.solar_panels.generation": "Generation",
+  "tooltip.solar_panels.transfer": "Max Transfer",
+  "tooltip.solar_panels.upgrade": "Upgrade Items: (Use on solar panel)",
+  "tooltip.solar_panels.shift_info": "Hold %s for upgrade information",
+  "tooltip.solar_panels.ctrl_info": "Hold %s for more details",
+  "tooltip.solar_panels.upgrade_gen": "Generation Increase",
+  "tooltip.solar_panels.upgrade_transfer": "Transfer Increase",
+  "tooltip.solar_panels.upgrade_capacity": "Capacity Increase",
+  "tooltip.solar_panels.upgrade_item": "Upgrade Item",
+
+  "waila.solar_panels.generating": "Generating",
+  "waila.solar_panels.transferring": "Transferring",
+
+  "config.jade.plugin_solar_panels.solar_panel": "Solar Panels",
+
+  "jei.solar_panels.upgrade": "Upgrade Solar Panel",
+  "jei.tooltip.solar_panels.upgrade_item": "Upgrade Item",
+  "jei.tooltip.solar_panels.upgraded_solar_panel": "Upgraded Solar Panel",
+  "jei.tooltip.solar_panels.gen_increase": "Increases generation by",
+    "jei.tooltip.solar_panels.transfer_increase": "Increases transfer by",
+    "jei.tooltip.solar_panels.capacity_increase": "Increases capacity by"
+}

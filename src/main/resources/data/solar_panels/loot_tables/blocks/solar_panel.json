@@ -1,0 +1,53 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "solar_panels:solar_panel",
+          "functions": [
+            {
+              "function": "minecraft:copy_name",
+              "source": "block_entity"
+            },
+            {
+              "function": "minecraft:copy_nbt",
+              "source": "block_entity",
+              "ops": [
+                {
+                  "op": "replace",
+                  "source": "Energy",
+                  "target": "BlockEntityTag.Energy"
+                },
+                {
+                  "op": "replace",
+                  "source": "Gen",
+                  "target": "BlockEntityTag.Gen"
+                },
+                {
+                  "op": "replace",
+                  "source": "Transfer",
+                  "target": "BlockEntityTag.Transfer"
+                },
+                {
+                  "op": "replace",
+                  "source": "Capacity",
+                  "target": "BlockEntityTag.Capacity"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "solar_panels:blocks/solar_panel"
+}
