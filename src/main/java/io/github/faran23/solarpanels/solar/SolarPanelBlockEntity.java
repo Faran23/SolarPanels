@@ -63,7 +63,7 @@ public class SolarPanelBlockEntity extends BlockEntity {
 
             @Override
             public boolean canReceive() {
-                return true;
+                return false;
             }
         });
     }
