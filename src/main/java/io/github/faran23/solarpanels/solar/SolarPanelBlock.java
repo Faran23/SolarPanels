@@ -97,8 +97,4 @@ public class SolarPanelBlock extends Block implements EntityBlock {
         return AABB;
     }
 
-    @Override
-    public void playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
-        super.playerWillDestroy(level, pos, state, player);
-    }
 }
