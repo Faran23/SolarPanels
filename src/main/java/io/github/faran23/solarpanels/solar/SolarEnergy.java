@@ -1,6 +1,7 @@
 package io.github.faran23.solarpanels.solar;
 
-import net.minecraftforge.energy.IEnergyStorage;
+
+import net.neoforged.neoforge.energy.IEnergyStorage;
 
 public class SolarEnergy implements IEnergyStorage {
 
@@ -9,7 +10,6 @@ public class SolarEnergy implements IEnergyStorage {
     public SolarEnergy(IEnergyStorage energy) {
         this.energy = energy;
     }
-
 
     @Override
     public int receiveEnergy(int i, boolean b) {

@@ -3,6 +3,7 @@ package io.github.faran23.solarpanels.solar;
 import io.github.faran23.solarpanels.Config;
 import io.github.faran23.solarpanels.register.Registration;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
@@ -11,12 +12,11 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.energy.EnergyStorage;
-import net.minecraftforge.energy.IEnergyStorage;
-import org.jetbrains.annotations.NotNull;
+
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.common.util.Lazy;
+import net.neoforged.neoforge.energy.EnergyStorage;
+import net.neoforged.neoforge.energy.IEnergyStorage;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -25,7 +25,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 public class SolarPanelBlockEntity extends BlockEntity {
 
     private EnergyStorage energy;
-    private LazyOptional<IEnergyStorage> energyHandler;
+    private Lazy<IEnergyStorage> energyHandler;
 
     private int energyGen;
     private int maxEnergyTransfer;
@@ -44,28 +44,7 @@ public class SolarPanelBlockEntity extends BlockEntity {
 
     private void setupEnergy() {
         this.energy = createEnergyStorage();
-        this.energyHandler = LazyOptional.of(() -> new SolarEnergy(energy) {
-
-            @Override
-            public int receiveEnergy(int i, boolean b) {
-                return 0;
-            }
-
-            @Override
-            public int extractEnergy(int i, boolean b) {
-                return 0;
-            }
-
-            @Override
-            public boolean canExtract() {
-                return false;
-            }
-
-            @Override
-            public boolean canReceive() {
-                return false;
-            }
-        });
+        this.energyHandler = Lazy.of(() -> energy);
     }
 
     private void setEnergyValues() {
@@ -125,17 +104,14 @@ public class SolarPanelBlockEntity extends BlockEntity {
     private int sendEnergy() {
         // send down only
         if (level == null || energy.getEnergyStored() <= 0) return 0;
-        BlockEntity be = level.getBlockEntity(getBlockPos().below());
-        if (be != null) {
-            return be.getCapability(ForgeCapabilities.ENERGY).map(e -> {
-                if (e.canReceive()) {
-                    int received = e.receiveEnergy(Math.min(energy.getEnergyStored(), maxEnergyTransfer), false);
-                    energy.extractEnergy(received, false);
-                    setChanged();
-                    return received;
-                }
-                return 0;
-            }).orElse(0);
+        IEnergyStorage energyBelow = level.getCapability(Capabilities.EnergyStorage.BLOCK, worldPosition.below(), Direction.UP);
+        if (energyBelow != null) {
+            if (energyBelow.canReceive()) {
+                int received = energyBelow.receiveEnergy(Math.min(energy.getEnergyStored(), maxEnergyTransfer), false);
+                energy.extractEnergy(received, false);
+                setChanged();
+                return received;
+            }
         }
         return 0;
     }
@@ -192,11 +168,8 @@ public class SolarPanelBlockEntity extends BlockEntity {
         return new EnergyStorage(maxEnergyStored, maxEnergyTransfer, maxEnergyTransfer);
     }
 
-    @Override
-    public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap) {
-        if (cap == ForgeCapabilities.ENERGY) {
-            return energyHandler.cast();
-        }
-        return super.getCapability(cap);
+    public IEnergyStorage getEnergyHandler() {
+        return energyHandler.get();
     }
+
 }
