@@ -3,17 +3,18 @@ package io.github.faran23.solarpanels;
 import com.mojang.logging.LogUtils;
 import io.github.faran23.solarpanels.compat.TOP;
 import io.github.faran23.solarpanels.register.Registration;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.server.ServerStartingEvent;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.ModLoadingContext;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.config.ModConfig;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.ModLoadingContext;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.config.ModConfig;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
+import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import org.slf4j.Logger;
 
 @Mod(SolarPanels.MODID)
@@ -22,13 +23,11 @@ public class SolarPanels {
     public static final String MODID = "solar_panels";
     private static final Logger LOGGER = LogUtils.getLogger();
 
-    public SolarPanels() {
-        IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+    public SolarPanels(IEventBus modEventBus) {
         modEventBus.addListener(this::commonSetup);
-
+        modEventBus.addListener(this::onRegisterCapabilities);
         Registration.register(modEventBus);
-
-        MinecraftForge.EVENT_BUS.register(this);
+        NeoForge.EVENT_BUS.register(this);
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SPEC);
     }
 
@@ -49,5 +48,9 @@ public class SolarPanels {
         public static void onClientSetup(FMLClientSetupEvent event) {
             LOGGER.info("[Solar Panels] Hello client!");
         }
+    }
+
+    public void onRegisterCapabilities(RegisterCapabilitiesEvent event) {
+        event.registerBlockEntity(Capabilities.EnergyStorage.BLOCK, Registration.SOLAR_BE.get(), (o, dir) -> o.getEnergyHandler());
     }
 }

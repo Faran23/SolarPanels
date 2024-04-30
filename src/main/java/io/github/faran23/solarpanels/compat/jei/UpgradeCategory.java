@@ -62,11 +62,11 @@ public class UpgradeCategory implements IRecipeCategory<UpgradeWrapper> {
     @Override
     public void draw(UpgradeWrapper recipe, @NotNull IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
         guiGraphics.blit(ARROW_TEX, WIDTH / 2 - 8, HEIGHT / 2 - 13, 0, 0, 0, 16, 16, 16, 16);
-        recipe.drawInfo(getWidth(), getHeight(), guiGraphics, mouseX, mouseY);
+        recipe.drawInfo(recipe, getWidth(), getHeight(), guiGraphics, mouseX, mouseY);
     }
 
     @Override
     public @NotNull List<Component> getTooltipStrings(UpgradeWrapper recipe, @NotNull IRecipeSlotsView recipeSlotsView, double mouseX, double mouseY) {
-        return recipe.getTooltipStrings(mouseX, mouseY);
+        return recipe.getTooltipStrings(recipe, mouseX, mouseY);
     }
 }
