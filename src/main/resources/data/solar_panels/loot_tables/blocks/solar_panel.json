@@ -40,6 +40,11 @@
                   "op": "replace",
                   "source": "Capacity",
                   "target": "BlockEntityTag.Capacity"
+                },
+                {
+                  "op": "replace",
+                  "source": "Color",
+                  "target": "BlockEntityTag.Color"
                 }
               ]
             }

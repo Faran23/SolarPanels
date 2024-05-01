@@ -1,11 +1,13 @@
 package io.github.faran23.solarpanels.solar;
 
 import io.github.faran23.solarpanels.Config;
+import io.github.faran23.solarpanels.GroupColor;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.DyeItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
@@ -19,6 +21,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -32,7 +35,9 @@ import javax.annotation.ParametersAreNonnullByDefault;
 public class SolarPanelBlock extends Block implements EntityBlock {
 
     private static final VoxelShape AABB =
-            Block.box(0.0D, 0.0D, 0.0D, 16.0D, 1.0D, 16.0D);
+            Block.box(1.0D, 0.0D, 1.0D, 15.0D, 1.0D, 15.0D);
+
+    public static final EnumProperty<GroupColor> COLOR = EnumProperty.create("color", GroupColor.class);
 
     public SolarPanelBlock() {
         super(Properties.of().instabreak().pushReaction(PushReaction.DESTROY).sound(SoundType.METAL).explosionResistance(3600000.0F).lightLevel(
@@ -47,6 +52,16 @@ public class SolarPanelBlock extends Block implements EntityBlock {
         if (level.isClientSide) return InteractionResult.SUCCESS;
 
         ItemStack stack = player.getItemInHand(hand);
+
+        // colour
+        if (stack.getItem() instanceof DyeItem dyeItem) {
+            BlockState newState = state.setValue(COLOR, GroupColor.fromString(dyeItem.getDyeColor().getName()));
+            stack.shrink(1);
+            level.setBlockAndUpdate(pos, newState);
+            return InteractionResult.SUCCESS;
+        }
+
+        // upgrade
         Config.Tier upgradeTier = Config.getTier(stack.getItem());
         if (upgradeTier != null) {
             BlockEntity be = level.getBlockEntity(pos);
@@ -83,17 +98,19 @@ public class SolarPanelBlock extends Block implements EntityBlock {
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         return this.defaultBlockState()
-                .setValue(BlockStateProperties.POWERED, false);
+                .setValue(BlockStateProperties.POWERED, false)
+                .setValue(COLOR, GroupColor.BLUE);
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
-        builder.add(BlockStateProperties.POWERED);
+        builder.add(BlockStateProperties.POWERED, COLOR);
     }
 
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter blockGetter, BlockPos pos, CollisionContext context) {
         return AABB;
     }
+
 }

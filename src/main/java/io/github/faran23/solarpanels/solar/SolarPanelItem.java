@@ -114,10 +114,13 @@ public class SolarPanelItem extends BlockItem {
     }
 
     private CompoundTag setupTag(CompoundTag tag) {
-        tag.put("Energy", IntTag.valueOf(0));
-        tag.putInt("Gen", Config.initialGenerationRate);
-        tag.putInt("Transfer", Config.initialTransferRate);
-        tag.putInt("Capacity", Config.initialMaxEnergy);
+        CompoundTag beTag = new CompoundTag();
+        beTag.put("Energy", IntTag.valueOf(0));
+        beTag.putInt("Gen", Config.initialGenerationRate);
+        beTag.putInt("Transfer", Config.initialTransferRate);
+        beTag.putInt("Capacity", Config.initialMaxEnergy);
+        beTag.putString("Color", Config.defaultColorName);
+        tag.put("BlockEntityTag", beTag);
         return tag;
     }
 }
