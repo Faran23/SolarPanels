@@ -29,13 +29,12 @@ import net.minecraftforge.client.RenderTypeHelper;
 import net.minecraftforge.client.model.data.ModelData;
 import net.minecraftforge.client.model.data.ModelProperty;
 
-import javax.annotation.ParametersAreNonnullByDefault;
+import java.awt.*;
 import java.util.List;
 
 import static io.github.faran23.solarpanels.Utils.humanReadableNumberNoUnit;
 
-@ParametersAreNonnullByDefault
-public class UpgradeWrapper implements IRecipeCategoryExtension<UpgradeWrapper>, IRecipeSlotTooltipCallback {
+public class UpgradeWrapper implements IRecipeCategoryExtension, IRecipeSlotTooltipCallback {
     private final Config.Tier upgrade;
     public static final ModelData MODEL_DATA = ModelData.builder().with(new ModelProperty<>(), true).build();
 
@@ -49,7 +48,7 @@ public class UpgradeWrapper implements IRecipeCategoryExtension<UpgradeWrapper>,
 
     // Mostly taken from create mod's code <3
     @Override
-    public void drawInfo(UpgradeWrapper recipe, int recipeWidth, int recipeHeight, GuiGraphics guiGraphics, double mouseX, double mouseY) {
+    public void drawInfo(int recipeWidth, int recipeHeight, GuiGraphics guiGraphics, double mouseX, double mouseY) {
         BlockState state = Registration.SOLAR_BLOCK.get().defaultBlockState();
 
         Minecraft mc = Minecraft.getInstance();
@@ -77,11 +76,13 @@ public class UpgradeWrapper implements IRecipeCategoryExtension<UpgradeWrapper>,
         Lighting.setupFor3DItems();
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
 
+        Color c = new Color(0, 0, 255); // colours not working here? just use a blue for now
+
         BakedModel model = blockRenderer.getBlockModel(state);
         for (RenderType chunkType : model.getRenderTypes(state, RandomSource.create(42L), MODEL_DATA)) {
             RenderType rt = RenderTypeHelper.getEntityRenderType(chunkType, true);
             blockRenderer.getModelRenderer()
-                    .renderModel(stack.last(), buffer.getBuffer(rt), state, model, 1.0F, 1.0F, 1.0F,
+                    .renderModel(stack.last(), buffer.getBuffer(rt), state, model, c.getRed(), c.getGreen(), c.getBlue(),
                             LightTexture.FULL_BRIGHT, OverlayTexture.NO_OVERLAY, MODEL_DATA, chunkType);
         }
 
@@ -105,5 +106,4 @@ public class UpgradeWrapper implements IRecipeCategoryExtension<UpgradeWrapper>,
             }
         });
     }
-
 }

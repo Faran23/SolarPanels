@@ -1,6 +1,7 @@
 package io.github.faran23.solarpanels.solar;
 
 import io.github.faran23.solarpanels.Config;
+import io.github.faran23.solarpanels.GroupColor;
 import io.github.faran23.solarpanels.register.Registration;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -100,7 +101,7 @@ public class SolarPanelBlockEntity extends BlockEntity {
     public void tickServer() {
         if (level == null) return;
 
-        boolean powered = level.canSeeSky(worldPosition) && level.isDay()/*&& !level.isRaining() && !level.isThundering()*/;
+        boolean powered = level.canSeeSky(worldPosition) && level.isDay() || Config.shouldAlwayGenerate;
 
         if (powered) {
             currentEnergyGen = generateEnergy();
@@ -171,6 +172,7 @@ public class SolarPanelBlockEntity extends BlockEntity {
         tag.putInt("Gen", energyGen);
         tag.putInt("Transfer", maxEnergyTransfer);
         tag.putInt("Capacity", maxEnergyStored);
+        tag.putString("Color", getBlockState().getValue(SolarPanelBlock.COLOR).getSerializedName());
     }
 
     @Override
@@ -184,6 +186,9 @@ public class SolarPanelBlockEntity extends BlockEntity {
         }
         if (tag.contains("Energy")) {
             energy.deserializeNBT(tag.get("Energy"));
+        }
+        if (tag.contains("Color")) {
+            level.setBlockAndUpdate(worldPosition, getBlockState().setValue(SolarPanelBlock.COLOR, GroupColor.fromString(tag.getString("Color"))));
         }
     }
 

@@ -8,6 +8,7 @@ import net.minecraft.nbt.IntTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
@@ -106,17 +107,20 @@ public class SolarPanelItem extends BlockItem {
     }
 
     @Override
-    public void onInventoryTick(ItemStack stack, Level level, Player player, int slotIndex, int selectedIndex) {
+    public void inventoryTick(ItemStack stack, Level level, Entity player, int slotIndex, boolean isSelected) {
         if (!stack.hasTag()) {
             setupTag(stack.getOrCreateTag());
         }
     }
 
     private CompoundTag setupTag(CompoundTag tag) {
-        tag.put("Energy", IntTag.valueOf(0));
-        tag.putInt("Gen", Config.initialGenerationRate);
-        tag.putInt("Transfer", Config.initialTransferRate);
-        tag.putInt("Capacity", Config.initialMaxEnergy);
+        CompoundTag beTag = new CompoundTag();
+        beTag.put("Energy", IntTag.valueOf(0));
+        beTag.putInt("Gen", Config.initialGenerationRate);
+        beTag.putInt("Transfer", Config.initialTransferRate);
+        beTag.putInt("Capacity", Config.initialMaxEnergy);
+        beTag.putString("Color", Config.defaultColorName);
+        tag.put("BlockEntityTag", beTag);
         return tag;
     }
 }

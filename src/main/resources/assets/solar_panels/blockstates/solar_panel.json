@@ -1,5 +1,6 @@
 {
   "variants": {
-    "": { "model":  "solar_panels:block/solar_panel" }
+    "powered=true": { "model":  "solar_panels:block/solar_panel_on" },
+    "powered=false": { "model":  "solar_panels:block/solar_panel_off" }
   }
 }

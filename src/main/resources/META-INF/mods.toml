@@ -1,7 +1,7 @@
 modLoader="javafml"
 loaderVersion="${loader_version_range}"
 license="${mod_license}"
-issueTrackerURL="https://github.com/Faran23/SolarPanels/issues/"
+issueTrackerURL="https://github.com/Faran23/SolarPanels/issues"
 
 [[mods]]
 modId="${mod_id}"
@@ -9,26 +9,23 @@ version="${mod_version}"
 displayName="${mod_name}"
 # A URL to query for updates for this mod. See the JSON update specification https://docs.minecraftforge.net/en/latest/misc/updatechecker/
 #updateJSONURL="https://change.me.example.invalid/updates.json"
-# A URL for the "homepage" for this mod, displayed in the mod UI
 displayURL="https://www.curseforge.com/minecraft/mc-mods/solar-panel"
 # A file name (in the root of the mod JAR) containing a logo for display
-#logoFile="examplemod.png" #optional
-#credits=""
+#logoFile="solar_panels.png"
+#credits="Thanks for this example mod goes to Java"
 authors="${mod_authors}"
 displayTest="MATCH_VERSION"
 
-
 description='''${mod_description}'''
-[[dependencies.${mod_id}]]
-    modId="forge"
-    mandatory=true
-    versionRange="${forge_version_range}"
-    ordering="NONE"
-    side="BOTH"
-
-[[dependencies.${mod_id}]]
-    modId="minecraft"
-    mandatory=true
-    versionRange="${minecraft_version_range}"
-    ordering="NONE"
-    side="BOTH"
+[[dependencies."${mod_id}"]]
+   modId="forge"
+   mandatory=true
+   versionRange="${forge_version_range}"
+   ordering="NONE"
+   side="BOTH"
+[[dependencies."${mod_id}"]]
+   modId="minecraft"
+   mandatory=true
+   versionRange="${minecraft_version_range}"
+   ordering="NONE"
+   side="BOTH"
