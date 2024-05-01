@@ -30,6 +30,16 @@ public class Config {
             .comment("The initial energy capacity of the solar panel. (Default: 10000)")
             .defineInRange("initialMaxEnergy", 10000, 0, Integer.MAX_VALUE);
 
+    // some other settings
+    public static final ForgeConfigSpec.BooleanValue ALWAYS_GENERATE = BUILDER
+            .comment("Should the solar panel always generate energy even when covered or during night time. (Default: false)")
+            .define("alwaysGenerate", false);
+    public static final ForgeConfigSpec.ConfigValue<String> DEFAULT_COLOR = BUILDER
+            .comment("The default color of the solar panel (must be a valid mc color). (Default: blue)")
+            .define("defaultColor", "blue", Config::validateColorName);
+
+
+
     // tier 1
     public static final ForgeConfigSpec.ConfigValue<String> TIER_1_UPGRADE_ITEM = BUILDER
             .comment("The item that represents the tier 1 upgrade. (Default: gold ingot)")
@@ -106,9 +116,16 @@ public class Config {
 
     public static Map<Item, Tier> tierMap = new HashMap<>();
 
+    public static boolean shouldAlwayGenerate;
+    public static String defaultColorName;
+
 
     private static boolean validateItemName(final Object obj) {
         return obj instanceof final String itemName && ForgeRegistries.ITEMS.containsKey(new ResourceLocation(itemName));
+    }
+
+    private static boolean validateColorName(final Object obj) {
+        return obj instanceof final String colorName && GroupColor.isColor(colorName);
     }
 
     private static boolean validateColor(final Object obj) {
@@ -121,6 +138,9 @@ public class Config {
         initialGenerationRate = INITIAL_GENERATION__RATE.get();
         initialTransferRate = INITIAL_TRANSFER_RATE.get();
         initialMaxEnergy = INITIAL_MAX_ENERGY.get();
+
+        shouldAlwayGenerate = ALWAYS_GENERATE.get();
+        defaultColorName = DEFAULT_COLOR.get();
 
         List<? extends Integer> t1Color = TIER_1_COLOR.get();
         tierMap.put(ForgeRegistries.ITEMS.getValue(new ResourceLocation(TIER_1_UPGRADE_ITEM.get())),
