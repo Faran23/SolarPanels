@@ -56,7 +56,9 @@ public class SolarPanelBlock extends Block implements EntityBlock {
         // colour
         if (stack.getItem() instanceof DyeItem dyeItem) {
             BlockState newState = state.setValue(COLOR, GroupColor.fromString(dyeItem.getDyeColor().getName()));
-            stack.shrink(1);
+            if (!player.isCreative()) {
+                stack.shrink(1);
+            }
             level.setBlockAndUpdate(pos, newState);
             return InteractionResult.SUCCESS;
         }
