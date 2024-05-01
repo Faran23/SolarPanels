@@ -31,10 +31,10 @@ public class Config {
             .defineInRange("initialMaxEnergy", 10000, 0, Integer.MAX_VALUE);
 
     // some other settings
-    public static final ForgeConfigSpec.BooleanValue ALWAYS_GENERATE = BUILDER
+    public static final ModConfigSpec.BooleanValue ALWAYS_GENERATE = BUILDER
             .comment("Should the solar panel always generate energy even when covered or during night time. (Default: false)")
             .define("alwaysGenerate", false);
-    public static final ForgeConfigSpec.ConfigValue<String> DEFAULT_COLOR = BUILDER
+    public static final ModConfigSpec.ConfigValue<String> DEFAULT_COLOR = BUILDER
             .comment("The default color of the solar panel (must be a valid mc color). (Default: blue)")
             .define("defaultColor", "blue", Config::validateColorName);
 
