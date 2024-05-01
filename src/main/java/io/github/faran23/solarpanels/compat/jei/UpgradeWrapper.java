@@ -29,12 +29,14 @@ import net.minecraftforge.client.RenderTypeHelper;
 import net.minecraftforge.client.model.data.ModelData;
 import net.minecraftforge.client.model.data.ModelProperty;
 
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.awt.*;
 import java.util.List;
 
 import static io.github.faran23.solarpanels.Utils.humanReadableNumberNoUnit;
 
-public class UpgradeWrapper implements IRecipeCategoryExtension, IRecipeSlotTooltipCallback {
+@ParametersAreNonnullByDefault
+public class UpgradeWrapper implements IRecipeCategoryExtension<UpgradeWrapper>, IRecipeSlotTooltipCallback {
     private final Config.Tier upgrade;
     public static final ModelData MODEL_DATA = ModelData.builder().with(new ModelProperty<>(), true).build();
 
@@ -48,7 +50,7 @@ public class UpgradeWrapper implements IRecipeCategoryExtension, IRecipeSlotTool
 
     // Mostly taken from create mod's code <3
     @Override
-    public void drawInfo(int recipeWidth, int recipeHeight, GuiGraphics guiGraphics, double mouseX, double mouseY) {
+    public void drawInfo(UpgradeWrapper recipe, int recipeWidth, int recipeHeight, GuiGraphics guiGraphics, double mouseX, double mouseY) {
         BlockState state = Registration.SOLAR_BLOCK.get().defaultBlockState();
 
         Minecraft mc = Minecraft.getInstance();
