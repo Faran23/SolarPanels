@@ -5,6 +5,7 @@ import io.github.faran23.solarpanels.solar.SolarPanelBlock;
 import io.github.faran23.solarpanels.solar.SolarPanelBlockEntity;
 import io.github.faran23.solarpanels.solar.SolarPanelItem;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
@@ -33,6 +34,7 @@ public class Registration {
 
     public static final RegistryObject<CreativeModeTab> SOLAR_CREATIVE_TAB = CREATIVE_TABS.register("solar_panels", () ->
             CreativeModeTab.builder().icon(() -> SOLAR_PANEL_ITEM.get().getDefaultInstance())
+                    .title(Component.translatable("creativetab.solar_panels"))
                     .displayItems((par, out) -> ITEMS.getEntries().forEach(item -> out.accept(item.get()))).build());
 
      public static void register(IEventBus bus) {
