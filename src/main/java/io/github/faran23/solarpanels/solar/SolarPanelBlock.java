@@ -100,13 +100,14 @@ public class SolarPanelBlock extends Block implements EntityBlock {
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         return this.defaultBlockState()
                 .setValue(BlockStateProperties.POWERED, false)
-                .setValue(COLOR, GroupColor.BLUE);
+                .setValue(COLOR, GroupColor.BLUE)
+                .setValue(BlockStateProperties.HORIZONTAL_FACING, context.getHorizontalDirection().getOpposite());
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
-        builder.add(BlockStateProperties.POWERED, COLOR);
+        builder.add(BlockStateProperties.POWERED, COLOR, BlockStateProperties.HORIZONTAL_FACING);
     }
 
     @Override
