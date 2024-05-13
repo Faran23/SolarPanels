@@ -3,11 +3,13 @@ package io.github.faran23.solarpanels.compat;
 import io.github.faran23.solarpanels.SolarPanels;
 import io.github.faran23.solarpanels.solar.SolarPanelBlockEntity;
 import mcjty.theoneprobe.api.*;
+import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.ModList;
 
@@ -47,7 +49,15 @@ public class TOP {
                         iProbeInfo.text(Component.translatable("waila.solar_panels.transferring")
                                 .append(" " + humanReadableNumberNoUnit(se.getCurrentEnergyTransfer(), false) + "/"
                                         + humanReadableNumberNoUnit(se.getMaxEnergyTransfer(), false) + " FE/t"));
+
+                        BlockState state = se.getBlockState();
+                        if (state.hasProperty(BlockStateProperties.POWERED) && !state.getValue(BlockStateProperties.POWERED)) {
+                            iProbeInfo.text(Component.translatable("waila.solar_panels.not_powered")
+                                    .withStyle(ChatFormatting.DARK_RED, ChatFormatting.BOLD));
+                        }
                     }
+
+
 
                 }
             });

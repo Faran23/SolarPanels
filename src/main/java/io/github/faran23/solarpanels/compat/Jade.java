@@ -3,9 +3,12 @@ package io.github.faran23.solarpanels.compat;
 import io.github.faran23.solarpanels.register.Registration;
 import io.github.faran23.solarpanels.solar.SolarPanelBlock;
 import io.github.faran23.solarpanels.solar.SolarPanelBlockEntity;
+import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import snownee.jade.api.*;
 import snownee.jade.api.config.IPluginConfig;
 
@@ -39,6 +42,10 @@ public class Jade implements IWailaPlugin {
                         .append(": " + blockAccessor.getServerData().getString("Transfer") + "/"
                                 + blockAccessor.getServerData().getString("MaxTransfer") + " FE/t"));
             }
+            if (blockAccessor.getServerData().contains("Powered") && !blockAccessor.getServerData().getBoolean("Powered")) {
+                iTooltip.add(Component.translatable("waila.solar_panels.not_powered")
+                        .withStyle(ChatFormatting.DARK_RED, ChatFormatting.BOLD));
+            }
         }
 
         @Override
@@ -48,6 +55,11 @@ public class Jade implements IWailaPlugin {
             tag.putString("MaxGen", humanReadableNumberNoUnit(se.getMaxEnergyGen(), false));
             tag.putString("Transfer", humanReadableNumberNoUnit(se.getCurrentEnergyTransfer(), false));
             tag.putString("MaxTransfer", humanReadableNumberNoUnit(se.getMaxEnergyTransfer(), false));
+
+            BlockState state = blockAccessor.getBlockState();
+            if (state.hasProperty(BlockStateProperties.POWERED)) {
+                tag.putBoolean("Powered", state.getValue(BlockStateProperties.POWERED));
+            }
         }
 
         @Override
