@@ -34,8 +34,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @ParametersAreNonnullByDefault
 public class SolarPanelBlock extends Block implements EntityBlock {
 
-    private static final VoxelShape AABB =
-            Block.box(1.0D, 0.0D, 1.0D, 15.0D, 1.0D, 15.0D);
+    private static final VoxelShape AABB = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 1.0D, 16.0D);
 
     public static final EnumProperty<GroupColor> COLOR = EnumProperty.create("color", GroupColor.class);
 
