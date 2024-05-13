@@ -16,6 +16,7 @@
 
   "waila.solar_panels.generating": "Generating",
   "waila.solar_panels.transferring": "Transferring",
+  "waila.solar_panels.not_powered": "Not Generating!",
 
   "config.jade.plugin_solar_panels.solar_panel": "Solar Panels",
 
