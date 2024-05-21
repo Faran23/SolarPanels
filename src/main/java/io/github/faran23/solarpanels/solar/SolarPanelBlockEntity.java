@@ -163,7 +163,7 @@ public class SolarPanelBlockEntity extends BlockEntity {
         if (tag.contains("Energy")) {
             energy.deserializeNBT(tag.get("Energy"));
         }
-        if (tag.contains("Color")) {
+        if (tag.contains("Color") && level != null) {
             level.setBlockAndUpdate(worldPosition, getBlockState().setValue(SolarPanelBlock.COLOR, GroupColor.fromString(tag.getString("Color"))));
         }
     }
