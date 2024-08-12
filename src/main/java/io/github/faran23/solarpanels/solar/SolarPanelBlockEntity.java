@@ -77,9 +77,14 @@ public class SolarPanelBlockEntity extends BlockEntity {
     }
 
     public void upgrade(Config.Tier tier, ServerLevel level) {
-        this.energyGen += tier.genIncrease;
-        this.maxEnergyTransfer += tier.transferIncrease;
-        this.maxEnergyStored += tier.capacityIncrease;
+        long newGen = energyGen + tier.genIncrease;
+        long newTransfer = maxEnergyTransfer + tier.transferIncrease;
+        long newCapacity = maxEnergyStored + tier.capacityIncrease;
+
+        // config values will never be > MAX_INT, so this effectively checks for overflow too
+        this.energyGen = (int) Math.min(newGen, Config.maxGenerationRate);
+        this.maxEnergyTransfer = (int) Math.min(newTransfer, Config.maxTransferRate);
+        this.maxEnergyStored = (int) Math.min(newCapacity, Config.maxCapacity);
 
         upgradeEffects(level);
 
