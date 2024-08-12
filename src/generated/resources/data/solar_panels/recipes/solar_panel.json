@@ -1,25 +1,23 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "misc",
-  "group": "solar_panels.recipe_group",
-  "pattern": [
-    "ggg",
-    "iri",
-    "iii"
-  ],
   "key": {
-    "i": {
-      "tag": "forge:ingots/iron"
-    },
-    "g": {
+    "G": {
       "tag": "forge:glass"
     },
-    "r": {
+    "I": {
+      "tag": "forge:ingots/iron"
+    },
+    "R": {
       "tag": "forge:dusts/redstone"
     }
   },
+  "pattern": [
+    "GGG",
+    "IRI",
+    "III"
+  ],
   "result": {
     "item": "solar_panels:solar_panel"
-  },
-  "show_notification": true
+  }
 }

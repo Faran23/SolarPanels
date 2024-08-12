@@ -1,5 +1,6 @@
 package io.github.faran23.solarpanels.compat;
 
+import io.github.faran23.solarpanels.Config;
 import io.github.faran23.solarpanels.register.Registration;
 import io.github.faran23.solarpanels.solar.SolarPanelBlock;
 import io.github.faran23.solarpanels.solar.SolarPanelBlockEntity;
@@ -32,17 +33,32 @@ public class Jade implements IWailaPlugin {
 
         @Override
         public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
-            if (blockAccessor.getServerData().contains("Gen") && blockAccessor.getServerData().contains("MaxGen")) {
+            CompoundTag serverData = blockAccessor.getServerData();
+            if (serverData.contains("Gen") && serverData.contains("MaxGen")) {
                 iTooltip.add(Component.translatable("waila.solar_panels.generating")
-                        .append(": " + blockAccessor.getServerData().getString("Gen") + "/"
-                                + blockAccessor.getServerData().getString("MaxGen") + " FE/t"));
+                        .append(": " + serverData.getString("Gen") + "/"
+                                + serverData.getString("MaxGen") + " FE/t"));
             }
-            if (blockAccessor.getServerData().contains("Transfer") && blockAccessor.getServerData().contains("MaxTransfer")) {
+            if (serverData.contains("Transfer") && serverData.contains("MaxTransfer")) {
                 iTooltip.add(Component.translatable("waila.solar_panels.transferring")
-                        .append(": " + blockAccessor.getServerData().getString("Transfer") + "/"
-                                + blockAccessor.getServerData().getString("MaxTransfer") + " FE/t"));
+                        .append(": " + serverData.getString("Transfer") + "/"
+                                + serverData.getString("MaxTransfer") + " FE/t"));
             }
-            if (blockAccessor.getServerData().contains("Powered") && !blockAccessor.getServerData().getBoolean("Powered")) {
+
+            if (serverData.contains("MaxGenInt") && serverData.getInt("MaxGenInt") >= Config.maxGenerationRate) {
+                iTooltip.add(Component.translatable("waila.solar_panels.at_max_gen")
+                        .withStyle(ChatFormatting.DARK_RED, ChatFormatting.BOLD));
+            }
+            if (serverData.contains("MaxTransferInt") && serverData.getInt("MaxTransferInt") >= Config.maxTransferRate) {
+                iTooltip.add(Component.translatable("waila.solar_panels.at_max_transfer")
+                        .withStyle(ChatFormatting.DARK_RED, ChatFormatting.BOLD));
+            }
+            if (serverData.contains("Capacity") && serverData.getInt("Capacity") >= Config.maxCapacity) {
+                iTooltip.add(Component.translatable("waila.solar_panels.at_max_capacity")
+                        .withStyle(ChatFormatting.DARK_RED, ChatFormatting.BOLD));
+            }
+
+            if (serverData.contains("Powered") && !serverData.getBoolean("Powered")) {
                 iTooltip.add(Component.translatable("waila.solar_panels.not_powered")
                         .withStyle(ChatFormatting.DARK_RED, ChatFormatting.BOLD));
             }
@@ -53,8 +69,11 @@ public class Jade implements IWailaPlugin {
             SolarPanelBlockEntity se = (SolarPanelBlockEntity) blockAccessor.getBlockEntity();
             tag.putString("Gen", humanReadableNumberNoUnit(se.getCurrentEnergyGen(), false));
             tag.putString("MaxGen", humanReadableNumberNoUnit(se.getMaxEnergyGen(), false));
+            tag.putInt("MaxGenInt", se.getMaxEnergyGen());
             tag.putString("Transfer", humanReadableNumberNoUnit(se.getCurrentEnergyTransfer(), false));
             tag.putString("MaxTransfer", humanReadableNumberNoUnit(se.getMaxEnergyTransfer(), false));
+            tag.putInt("MaxTransferInt", se.getMaxEnergyTransfer());
+            tag.putInt("Capacity", se.getMaxEnergy());
 
             BlockState state = blockAccessor.getBlockState();
             if (state.hasProperty(BlockStateProperties.POWERED)) {

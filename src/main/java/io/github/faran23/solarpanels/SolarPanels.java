@@ -2,8 +2,13 @@ package io.github.faran23.solarpanels;
 
 import com.mojang.logging.LogUtils;
 import io.github.faran23.solarpanels.compat.TOP;
+import io.github.faran23.solarpanels.datagen.SolarLootTableProvider;
+import io.github.faran23.solarpanels.datagen.SolarRecipeProvider;
 import io.github.faran23.solarpanels.register.Registration;
 import io.github.faran23.solarpanels.solar.SolarPanelBlock;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.nbt.CompoundTag;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
@@ -17,8 +22,11 @@ import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.data.event.GatherDataEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import org.slf4j.Logger;
+
+import java.util.concurrent.CompletableFuture;
 
 @Mod(SolarPanels.MODID)
 public class SolarPanels {
@@ -77,4 +85,17 @@ public class SolarPanels {
     public void onRegisterCapabilities(RegisterCapabilitiesEvent event) {
         event.registerBlockEntity(Capabilities.EnergyStorage.BLOCK, Registration.SOLAR_BE.get(), (o, dir) -> o.getEnergyHandler());
     }
+
+    @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
+    public static class DataGenerators {
+        @SubscribeEvent
+        public static void gatherData(GatherDataEvent event) {
+            DataGenerator generator = event.getGenerator();
+            PackOutput output = generator.getPackOutput();
+
+            generator.addProvider(event.includeServer(), new SolarRecipeProvider(output));
+            generator.addProvider(event.includeServer(), new SolarLootTableProvider(output));
+        }
+    }
+
 }

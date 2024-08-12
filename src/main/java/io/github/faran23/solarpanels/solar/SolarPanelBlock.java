@@ -48,7 +48,7 @@ public class SolarPanelBlock extends Block implements EntityBlock {
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player,
                                  InteractionHand hand, BlockHitResult blockHitResult) {
-        if (level.isClientSide) return InteractionResult.SUCCESS;
+        if (level.isClientSide) return InteractionResult.sidedSuccess(true);
 
         ItemStack stack = player.getItemInHand(hand);
 
@@ -59,7 +59,7 @@ public class SolarPanelBlock extends Block implements EntityBlock {
                 stack.shrink(1);
             }
             level.setBlockAndUpdate(pos, newState);
-            return InteractionResult.SUCCESS;
+            return InteractionResult.sidedSuccess(true);
         }
 
         // upgrade
@@ -71,7 +71,7 @@ public class SolarPanelBlock extends Block implements EntityBlock {
                 if (!player.isCreative()) {
                     stack.shrink(1);
                 }
-                return InteractionResult.SUCCESS;
+                return InteractionResult.sidedSuccess(true);
             }
         }
 
