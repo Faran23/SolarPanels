@@ -1,5 +1,6 @@
 package io.github.faran23.solarpanels.compat;
 
+import io.github.faran23.solarpanels.Config;
 import io.github.faran23.solarpanels.SolarPanels;
 import io.github.faran23.solarpanels.solar.SolarPanelBlockEntity;
 import mcjty.theoneprobe.api.*;
@@ -55,6 +56,20 @@ public class TOP {
                             iProbeInfo.text(Component.translatable("waila.solar_panels.not_powered")
                                     .withStyle(ChatFormatting.DARK_RED, ChatFormatting.BOLD));
                         }
+
+                        if (se.getMaxEnergyGen() >= Config.maxGenerationRate) {
+                            iProbeInfo.text(Component.translatable("waila.solar_panels.at_max_gen")
+                                    .withStyle(ChatFormatting.DARK_RED, ChatFormatting.BOLD));
+                        }
+                        if (se.getMaxEnergyTransfer() >= Config.maxTransferRate) {
+                            iProbeInfo.text(Component.translatable("waila.solar_panels.at_max_transfer")
+                                    .withStyle(ChatFormatting.DARK_RED, ChatFormatting.BOLD));
+                        }
+                        if (se.getMaxEnergy() >= Config.maxCapacity) {
+                            iProbeInfo.text(Component.translatable("waila.solar_panels.at_max_capacity")
+                                    .withStyle(ChatFormatting.DARK_RED, ChatFormatting.BOLD));
+                        }
+
                     }
 
 

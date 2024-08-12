@@ -2,12 +2,18 @@ package io.github.faran23.solarpanels;
 
 import com.mojang.logging.LogUtils;
 import io.github.faran23.solarpanels.compat.TOP;
+import io.github.faran23.solarpanels.datagen.SolarLootTableProvider;
+import io.github.faran23.solarpanels.datagen.SolarRecipeProvider;
 import io.github.faran23.solarpanels.register.Registration;
 import io.github.faran23.solarpanels.solar.SolarPanelBlock;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RegisterColorHandlersEvent;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -18,6 +24,8 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
+
+import java.util.concurrent.CompletableFuture;
 
 @Mod(SolarPanels.MODID)
 public class SolarPanels {
@@ -71,6 +79,19 @@ public class SolarPanels {
                 }
                 return GroupColor.fromString(Config.defaultColorName).getRGB();
             }, Registration.SOLAR_PANEL_ITEM.get());
+        }
+    }
+
+    @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
+    public static class DataGenerators {
+        @SubscribeEvent
+        public static void gatherData(GatherDataEvent event) {
+            DataGenerator generator = event.getGenerator();
+            PackOutput output = generator.getPackOutput();
+            CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
+
+            generator.addProvider(event.includeServer(), new SolarRecipeProvider(output));
+            generator.addProvider(event.includeServer(), new SolarLootTableProvider(output, lookupProvider));
         }
     }
 

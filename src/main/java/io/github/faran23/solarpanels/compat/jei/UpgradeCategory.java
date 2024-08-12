@@ -56,7 +56,7 @@ public class UpgradeCategory implements IRecipeCategory<UpgradeWrapper> {
         builder.addSlot(RecipeIngredientRole.INPUT, WIDTH / 2 - 8, 3).addItemStack(upgradeWrapper.getUpgradeItem().getDefaultInstance())
                 .addTooltipCallback(upgradeWrapper).setSlotName("jei.tooltip.solar_panels.upgrade_item");
         builder.addInvisibleIngredients(RecipeIngredientRole.INPUT).addIngredient(VanillaTypes.ITEM_STACK, new ItemStack(Registration.SOLAR_BLOCK.get()));
-        builder.addInvisibleIngredients(RecipeIngredientRole.OUTPUT).addIngredient(VanillaTypes.ITEM_STACK, new ItemStack(Registration.SOLAR_BLOCK.get()));
+//        builder.addInvisibleIngredients(RecipeIngredientRole.OUTPUT).addIngredient(VanillaTypes.ITEM_STACK, new ItemStack(Registration.SOLAR_BLOCK.get()));
     }
 
     @Override
