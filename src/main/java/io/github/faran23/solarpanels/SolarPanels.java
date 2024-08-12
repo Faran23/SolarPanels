@@ -1,7 +1,6 @@
 package io.github.faran23.solarpanels;
 
 import com.mojang.logging.LogUtils;
-import io.github.faran23.solarpanels.compat.TOP;
 import io.github.faran23.solarpanels.datagen.SolarLootTableProvider;
 import io.github.faran23.solarpanels.datagen.SolarRecipeProvider;
 import io.github.faran23.solarpanels.register.Registration;
@@ -44,7 +43,6 @@ public class SolarPanels {
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
-        TOP.register();
     }
 
 
