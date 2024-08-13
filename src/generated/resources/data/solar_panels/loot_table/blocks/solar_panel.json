@@ -1,0 +1,35 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "minecraft:copy_name",
+              "source": "block_entity"
+            },
+            {
+              "function": "minecraft:copy_components",
+              "include": [
+                "solar_panels:solar_energy_data",
+                "solar_panels:color_data"
+              ],
+              "source": "block_entity"
+            }
+          ],
+          "name": "solar_panels:solar_panel"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "solar_panels:blocks/solar_panel"
+}
