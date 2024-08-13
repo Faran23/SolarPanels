@@ -14,6 +14,7 @@ import java.awt.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Mod.EventBusSubscriber(modid = SolarPanels.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class Config {
@@ -138,7 +139,7 @@ public class Config {
     public static int maxTransferRate;
     public static int maxCapacity;
 
-    public static Map<Item, Tier> tierMap = new HashMap<>();
+    public static Map<Item, Tier> tierMap = new ConcurrentHashMap<>();
 
 
 //    private static boolean validateItemName(final Object obj) {
