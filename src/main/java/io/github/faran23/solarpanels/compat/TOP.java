@@ -1,5 +1,6 @@
 package io.github.faran23.solarpanels.compat;
 
+import io.github.faran23.solarpanels.Config;
 import io.github.faran23.solarpanels.SolarPanels;
 import io.github.faran23.solarpanels.Config;
 import io.github.faran23.solarpanels.solar.SolarPanelBlockEntity;
