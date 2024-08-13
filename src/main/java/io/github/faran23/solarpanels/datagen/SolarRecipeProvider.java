@@ -3,13 +3,12 @@ package io.github.faran23.solarpanels.datagen;
 
 import io.github.faran23.solarpanels.register.Registration;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeCategory;
+import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraftforge.common.Tags;
-
-import java.util.function.Consumer;
+import org.jetbrains.annotations.NotNull;
 
 public class SolarRecipeProvider extends RecipeProvider {
 
@@ -20,7 +19,7 @@ public class SolarRecipeProvider extends RecipeProvider {
     }
 
     @Override
-    protected void buildRecipes(Consumer<FinishedRecipe> consumer) {
+    protected void buildRecipes(@NotNull RecipeOutput output) {
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Registration.SOLAR_PANEL_ITEM.get())
                 .pattern("GGG")
                 .pattern("IRI")
@@ -30,6 +29,6 @@ public class SolarRecipeProvider extends RecipeProvider {
                 .define('R', Tags.Items.DUSTS_REDSTONE)
                 .unlockedBy("has_iron_ingot", has(Tags.Items.INGOTS_IRON))
                 .group(RECIPE_GROUP)
-                .save(consumer);
+                .save(output);
     }
 }
