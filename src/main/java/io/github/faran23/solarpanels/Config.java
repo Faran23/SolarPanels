@@ -1,6 +1,7 @@
 package io.github.faran23.solarpanels;
 
 import com.electronwill.nightconfig.core.EnumGetMethod;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.neoforged.bus.api.SubscribeEvent;
