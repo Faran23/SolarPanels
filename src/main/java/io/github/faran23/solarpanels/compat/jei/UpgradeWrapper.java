@@ -98,7 +98,7 @@ public class UpgradeWrapper implements IRecipeCategoryExtension<UpgradeWrapper>,
         iRecipeSlotView.getDisplayedItemStack().ifPresent(itemStack -> {
             if (Config.tierMap.containsKey(itemStack.getItem())) {
                 Item item = itemStack.getItem();
-                Config.Tier tier = Config.tierMap.get(item);
+                Config.Tier tier = Config.getTier(item);
                 list.add(Component.translatable("jei.tooltip.solar_panels.gen_increase").withStyle(ChatFormatting.GREEN)
                         .append(Component.literal(": " + humanReadableNumberNoUnit(tier.genIncrease, false) + " FE/t")));
                 list.add(Component.translatable("jei.tooltip.solar_panels.transfer_increase").withStyle(ChatFormatting.GREEN)
