@@ -67,5 +67,6 @@
   "jei.tooltip.solar_panels.upgraded_solar_panel": "Upgraded Solar Panel",
   "jei.tooltip.solar_panels.gen_increase": "Increases generation by",
   "jei.tooltip.solar_panels.transfer_increase": "Increases transfer by",
-  "jei.tooltip.solar_panels.capacity_increase": "Increases capacity by"
+  "jei.tooltip.solar_panels.capacity_increase": "Increases capacity by",
+  "jei.tooltip.solar_panels.use_item": "Use item on solar panel to upgrade"
 }
