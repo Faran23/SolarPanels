@@ -4,6 +4,7 @@ import io.github.faran23.solarpanels.SolarPanels;
 import io.github.faran23.solarpanels.register.Registration;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
+import mezz.jei.api.gui.builder.ITooltipBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
@@ -51,6 +52,8 @@ public class UpgradeCategory implements IRecipeCategory<UpgradeWrapper> {
         return guiHelper.createDrawableItemStack(new ItemStack(Registration.SOLAR_BLOCK.get()));
     }
 
+
+
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, UpgradeWrapper upgradeWrapper, @NotNull IFocusGroup iFocusGroup) {
         builder.addSlot(RecipeIngredientRole.INPUT, WIDTH / 2 - 8, 3).addItemStack(upgradeWrapper.getUpgradeItem().getDefaultInstance())
@@ -66,7 +69,7 @@ public class UpgradeCategory implements IRecipeCategory<UpgradeWrapper> {
     }
 
     @Override
-    public @NotNull List<Component> getTooltipStrings(UpgradeWrapper recipe, @NotNull IRecipeSlotsView recipeSlotsView, double mouseX, double mouseY) {
-        return recipe.getTooltipStrings(recipe, mouseX, mouseY);
+    public void getTooltip(ITooltipBuilder tooltip, UpgradeWrapper recipe, IRecipeSlotsView recipeSlotsView, double mouseX, double mouseY) {
+        tooltip.add(Component.translatable("jei.tooltip.solar_panels.use_item"));
     }
 }

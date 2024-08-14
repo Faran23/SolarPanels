@@ -8,6 +8,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import io.github.faran23.solarpanels.config.Config;
 import io.github.faran23.solarpanels.register.Registration;
+import mezz.jei.api.gui.builder.ITooltipBuilder;
 import mezz.jei.api.gui.ingredient.IRecipeSlotTooltipCallback;
 import mezz.jei.api.gui.ingredient.IRecipeSlotView;
 import mezz.jei.api.recipe.category.extensions.IRecipeCategoryExtension;
@@ -94,16 +95,20 @@ public class UpgradeWrapper implements IRecipeCategoryExtension<UpgradeWrapper>,
 
     @Override
     public void onTooltip(IRecipeSlotView iRecipeSlotView, List<Component> list) {
-        iRecipeSlotView.getSlotName().ifPresent(s -> list.add(Component.translatable(s)));
-        iRecipeSlotView.getDisplayedItemStack().ifPresent(itemStack -> {
+    }
+
+    @Override
+    public void onRichTooltip(IRecipeSlotView recipeSlotView, ITooltipBuilder tooltip) {
+        recipeSlotView.getSlotName().ifPresent(s -> tooltip.add(Component.translatable(s)));
+        recipeSlotView.getDisplayedItemStack().ifPresent(itemStack -> {
             if (Config.tierMap.containsKey(itemStack.getItem())) {
                 Item item = itemStack.getItem();
-                Config.Tier tier = Config.tierMap.get(item);
-                list.add(Component.translatable("jei.tooltip.solar_panels.gen_increase").withStyle(ChatFormatting.GREEN)
+                Config.Tier tier = Config.getTier(item);
+                tooltip.add(Component.translatable("jei.tooltip.solar_panels.gen_increase").withStyle(ChatFormatting.GREEN)
                         .append(Component.literal(": " + humanReadableNumberNoUnit(tier.genIncrease, false) + " FE/t")));
-                list.add(Component.translatable("jei.tooltip.solar_panels.transfer_increase").withStyle(ChatFormatting.GREEN)
+                tooltip.add(Component.translatable("jei.tooltip.solar_panels.transfer_increase").withStyle(ChatFormatting.GREEN)
                         .append(Component.literal(": " + humanReadableNumberNoUnit(tier.transferIncrease, false) + " FE/t")));
-                list.add(Component.translatable("jei.tooltip.solar_panels.capacity_increase").withStyle(ChatFormatting.GREEN)
+                tooltip.add(Component.translatable("jei.tooltip.solar_panels.capacity_increase").withStyle(ChatFormatting.GREEN)
                         .append(Component.literal(": " + humanReadableNumberNoUnit(tier.capacityIncrease, false) + " FE")));
             }
         });

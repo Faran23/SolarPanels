@@ -27,6 +27,7 @@
   "solar_panels.configuration.gen_increase": "Generation Increase",
   "solar_panels.configuration.transfer_increase": "Transfer Increase",
   "solar_panels.configuration.capacity_increase": "Capacity Increase",
+  "solar_panels.configuration.tooltip_color": "Tooltip Color",
   "solar_panels.configuration.color": "Tooltip Color",
   "solar_panels.configuration.initial_capacity.tooltip": "The initial FE energy capacity of the solar panel.",
   "solar_panels.configuration.initial_transfer_rate.tooltip": "The initial FE/t max energy transfer rate of the solar panel.",
@@ -42,7 +43,6 @@
   "solar_panels.configuration.tier4.tooltip": "Edit tier 4 upgrade details.",
   "solar_panels.configuration.transfer_increase.tooltip": "How much FE/t to increase the solar panel's max energy transfer rate by when the upgrade is applied.",
   "solar_panels.configuration.upgrade_item.tooltip": "The item that represents the upgrade.",
-  "solar_panels.configuration.tooltip_color.tooltip": "RGB Color of the upgrade tooltip.",
   "solar_panels.configuration.default_color.tooltip": "The default color of the solar panel.",
   "solar_panels.configuration.capacity_increase.tooltip": "How much FE to increase the solar panel's capacity by when the upgrade is applied.",
   "solar_panels.configuration.gen_increase.tooltip": "How much FE/t to increase the solar panel's max energy transfer rate by when the upgrade is applied.",
@@ -60,5 +60,6 @@
   "jei.tooltip.solar_panels.upgraded_solar_panel": "Upgraded Solar Panel",
   "jei.tooltip.solar_panels.gen_increase": "Increases generation by",
   "jei.tooltip.solar_panels.transfer_increase": "Increases transfer by",
-  "jei.tooltip.solar_panels.capacity_increase": "Increases capacity by"
+  "jei.tooltip.solar_panels.capacity_increase": "Increases capacity by",
+  "jei.tooltip.solar_panels.use_item": "Use item on solar panel to upgrade"
 }
