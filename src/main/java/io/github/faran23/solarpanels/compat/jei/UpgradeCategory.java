@@ -67,6 +67,6 @@ public class UpgradeCategory implements IRecipeCategory<UpgradeWrapper> {
 
     @Override
     public @NotNull List<Component> getTooltipStrings(UpgradeWrapper recipe, @NotNull IRecipeSlotsView recipeSlotsView, double mouseX, double mouseY) {
-        return recipe.getTooltipStrings(mouseX, mouseY);
+        return List.of(Component.translatable("jei.tooltip.solar_panels.use_item"));
     }
 }
