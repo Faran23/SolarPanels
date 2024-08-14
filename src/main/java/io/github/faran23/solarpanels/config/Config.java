@@ -61,69 +61,88 @@ public class Config {
 
     // tier 1
     public static final ModConfigSpec.ConfigValue<String> TIER_1_UPGRADE_ITEM = BUILDER
+            .worldRestart()
             .comment(UPGRADE_ITEM_COMMENT, java.lang.String.format(DEFAULT_STRING, "gold_ingot"))
             .defineInList("tier1.upgrade_item", "minecraft:gold_ingot", ALL_ITEMS);
     public static final ModConfigSpec.IntValue TIER_1_GEN_INCREASE = BUILDER
+            .worldRestart()
             .comment(GEN_INCREASE_COMMENT, java.lang.String.format(DEFAULT_STRING, 20))
             .defineInRange("tier1.gen_increase", 20, 0, Integer.MAX_VALUE);
     public static final ModConfigSpec.IntValue TIER_1_TRANSFER_INCREASE = BUILDER
+            .worldRestart()
             .comment(TRANSFER_INCREASE_COMMENT, java.lang.String.format(DEFAULT_STRING, 40))
             .defineInRange("tier1.transfer_increase", 40, 0, Integer.MAX_VALUE);
     public static final ModConfigSpec.IntValue TIER_1_CAPACITY_INCREASE = BUILDER
+            .worldRestart()
             .comment(CAPACITY_INCREASE_COMMENT, java.lang.String.format(DEFAULT_STRING, 10000))
             .defineInRange("tier1.capacity_increase", 10000, 0, Integer.MAX_VALUE);
     public static final ModConfigSpec.IntValue TIER_1_COLOR = BUILDER
+            .worldRestart()
             .comment(COLOR_COMMENT, java.lang.String.format(DEFAULT_STRING, 16766720))
             .defineInRange("tier1.tooltip_color", 16766720, 0, MAX_RGB);
 
     // tier 2
     public static final ModConfigSpec.ConfigValue<String> TIER_2_UPGRADE_ITEM = BUILDER
+            .worldRestart()
             .comment(UPGRADE_ITEM_COMMENT, java.lang.String.format(DEFAULT_STRING, "diamond"))
             .defineInList("tier2.upgrade_item", "minecraft:diamond", ALL_ITEMS);
     public static final ModConfigSpec.IntValue TIER_2_GEN_INCREASE = BUILDER
+            .worldRestart()
             .comment(GEN_INCREASE_COMMENT, java.lang.String.format(DEFAULT_STRING, 200))
             .defineInRange("tier2.gen_increase", 200, 0, Integer.MAX_VALUE);
     public static final ModConfigSpec.IntValue TIER_2_TRANSFER_INCREASE = BUILDER
+            .worldRestart()
             .comment(TRANSFER_INCREASE_COMMENT, java.lang.String.format(DEFAULT_STRING, 400))
             .defineInRange("tier2.transfer_increase", 400, 0, Integer.MAX_VALUE);
     public static final ModConfigSpec.IntValue TIER_2_CAPACITY_INCREASE = BUILDER
+            .worldRestart()
             .comment(CAPACITY_INCREASE_COMMENT, java.lang.String.format(DEFAULT_STRING, 100000))
             .defineInRange("tier2.capacity_increase", 100000, 0, Integer.MAX_VALUE);
     public static final ModConfigSpec.IntValue TIER_2_COLOR = BUILDER
+            .worldRestart()
             .comment(COLOR_COMMENT, java.lang.String.format(DEFAULT_STRING, 55255))
             .defineInRange("tier2.color", 55255, 0, MAX_RGB);
 
     // tier 3
     public static final ModConfigSpec.ConfigValue<String> TIER_3_UPGRADE_ITEM = BUILDER
+            .worldRestart()
             .comment(UPGRADE_ITEM_COMMENT, java.lang.String.format(DEFAULT_STRING, "netherite_ingot"))
             .defineInList("tier3.upgrade_item", "minecraft:netherite_ingot", ALL_ITEMS);
     public static final ModConfigSpec.IntValue TIER_3_GEN_INCREASE = BUILDER
+            .worldRestart()
             .comment(GEN_INCREASE_COMMENT, java.lang.String.format(DEFAULT_STRING, 1000))
             .defineInRange("tier3.gen_increase", 1000, 0, Integer.MAX_VALUE);
     public static final ModConfigSpec.IntValue TIER_3_TRANSFER_INCREASE = BUILDER
+            .worldRestart()
             .comment(TRANSFER_INCREASE_COMMENT, java.lang.String.format(DEFAULT_STRING, 2000))
             .defineInRange("tier3.transfer_increase", 2000, 0, Integer.MAX_VALUE);
     public static final ModConfigSpec.IntValue TIER_3_CAPACITY_INCREASE = BUILDER
+            .worldRestart()
             .comment(CAPACITY_INCREASE_COMMENT, java.lang.String.format(DEFAULT_STRING, 1000000))
             .defineInRange("tier3.capacity_increase", 1000000, 0, Integer.MAX_VALUE);
     public static final ModConfigSpec.IntValue TIER_3_COLOR = BUILDER
+            .worldRestart()
             .comment(COLOR_COMMENT, java.lang.String.format(DEFAULT_STRING, 3288385))
             .defineInRange("tier3.color", 3288385, 0, MAX_RGB);
 
     // tier 4
     public static final ModConfigSpec.ConfigValue<String> TIER_4_UPGRADE_ITEM = BUILDER
+            .worldRestart()
             .comment(UPGRADE_ITEM_COMMENT, java.lang.String.format(DEFAULT_STRING, "nether_star"))
             .defineInList("tier4.upgrade_item", "minecraft:nether_star", ALL_ITEMS);
     public static final ModConfigSpec.IntValue TIER_4_GEN_INCREASE = BUILDER
             .comment(GEN_INCREASE_COMMENT, java.lang.String.format(DEFAULT_STRING, 10000))
             .defineInRange("tier4.gen_increase", 10000, 0, Integer.MAX_VALUE);
     public static final ModConfigSpec.IntValue TIER_4_TRANSFER_INCREASE = BUILDER
+            .worldRestart()
             .comment(TRANSFER_INCREASE_COMMENT, java.lang.String.format(DEFAULT_STRING, 20000))
             .defineInRange("tier4.transfer_increase", 20000, 0, Integer.MAX_VALUE);
     public static final ModConfigSpec.IntValue TIER_4_CAPACITY_INCREASE = BUILDER
+            .worldRestart()
             .comment(CAPACITY_INCREASE_COMMENT, java.lang.String.format(DEFAULT_STRING, 100000000))
             .defineInRange("tier4.capacity_increase", 100000000, 0, Integer.MAX_VALUE);
     public static final ModConfigSpec.IntValue TIER_4_COLOR = BUILDER
+            .worldRestart()
             .comment(COLOR_COMMENT, java.lang.String.format(DEFAULT_STRING, 14142935))
             .defineInRange("tier4.color", 14142935, 0, MAX_RGB);
 
